@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sayan Yadav | Web Developer</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ===== RESET ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #fafffd;
+        color: #342e37;
+        padding-top: 80px;
+      }
+
+      /* ===== CONTAINER (FOR TEXT ONLY) ===== */
+      .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+      }
+
+      /* ===== HEADER ===== */
+      .header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        padding: 15px 0;
+
+        /* Glass Effect */
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(12px);
+
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      nav a.active {
+        color: #fa824c;
+        font-weight: 600;
+        position: relative;
+      }
+
+      nav a.active::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #fa824c;
+        left: 0;
+        bottom: -6px;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .logo span {
+        color: #fa824c;
+      }
+
+      nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        font-weight: 500;
+        color: #342e37;
+        transition: 0.3s;
+      }
+
+      nav a:hover {
+        color: #fa824c;
+      }
+      /* ===== HAMBURGER ===== */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .menu-toggle span {
+        height: 3px;
+        width: 25px;
+        background: #342e37;
+        margin: 4px 0;
+        transition: 0.3s;
+      }
+
+      /* Animate Hamburger to X */
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      /* ===== DARK MODE ===== */
+      body.dark {
+        background: #0f0f0f;
+        color: #f1f1f1;
+      }
+
+      /* Header */
+      body.dark .header {
+        background: rgba(15, 15, 15, 0.75);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* Navbar links */
+      body.dark nav a {
+        color: #ddd;
+      }
+
+      body.dark nav a.active {
+        color: #fa824c;
+      }
+
+      /* Sections */
+      body.dark .hero,
+      body.dark .projects,
+      body.dark .contact {
+        background: #111;
+      }
+
+      body.dark .skills {
+        background: #0d0d0d;
+      }
+
+      /* Cards */
+      body.dark .about-box,
+      body.dark .project-card,
+      body.dark .contact-form,
+      body.dark .experience-box {
+        background: #181818;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Text */
+      body.dark h1,
+      body.dark h2,
+      body.dark h3 {
+        color: #fff;
+      }
+
+      body.dark p {
+        color: #bbb;
+      }
+
+      /* Inputs */
+      body.dark input,
+      body.dark textarea {
+        background: #111;
+        color: #fff;
+        border: 1px solid #333;
+      }
+
+      body.dark input::placeholder,
+      body.dark textarea::placeholder {
+        color: #777;
+      }
+
+      /* Progress bar background */
+      body.dark .progress {
+        background: #333;
+      }
+
+      /* Footer */
+      body.dark .footer {
+        background: #000;
+      }
+      /* Dark mode toggle base */
+      .theme-toggle {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        color: #342e37;
+        transition: 0.3s;
+      }
+
+      .theme-toggle:hover {
+        color: #fa824c;
+      }
+
+      /* Hide text on desktop */
+      .theme-toggle span {
+        display: none;
+      }
+
+      /* MOBILE ONLY */
+      @media (max-width: 900px) {
+        /* Show text inside menu */
+        .theme-toggle span {
+          display: inline;
+        }
+
+        .mobile-toggle {
+          margin-bottom: 15px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #ddd;
+        }
+      }
+
+      /* Dark mode colors */
+      body.dark .theme-toggle {
+        color: #fff;
+      }
+
+      /* ===== MOBILE ===== */
+      @media (max-width: 900px) {
+        nav {
+          position: absolute;
+          top: 70px;
+          right: 20px;
+          background: rgba(255, 255, 255, 0.95);
+          flex-direction: column;
+          width: 200px;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          display: none;
+        }
+
+        nav.show {
+          display: flex;
+        }
+
+        nav a {
+          margin: 10px 0;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .navbar {
+          gap: 15px;
+        }
+
+        .logo {
+          font-size: 24px;
+        }
+
+        .theme-toggle {
+          font-size: 18px;
+        }
+        .theme-toggle {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+        }
+      }
+      /* ===== HERO ===== */
+      .hero {
+        background: #f5f5f5;
+        padding: 80px 0;
+      }
+
+      .hero-wrapper {
+        display: flex;
+        align-items: center;
+      }
+
+      .hero-text {
+        flex: 1;
+      }
+
+      .hero-text .container {
+        padding-right: 40px;
+      }
+
+      .hero-text h1 {
+        font-size: 50px;
+        margin: 10px 0;
+        margin-left: 40px;
+      }
+
+      .hero-text h1 span {
+        color: #fa824c;
+      }
+
+      .hero-text h2 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #555;
+        margin-bottom: 20px;
+        margin-left: 40px;
+      }
+      #typing-text {
+        font-size: 20px;
+        line-height: 32px;
+        color: #555;
+      }
+
+      body.dark #typing-text {
+        color: #bbb;
+      }
+
+      .social {
+        margin-left: 40px;
+      }
+      .social a {
+        display: inline-block;
+        height: 45px;
+        width: 45px;
+        line-height: 45px;
+        border-radius: 50%;
+        border: 2px solid #fa824c;
+        color: #fa824c;
+        text-align: center;
+        margin-right: 10px;
+        transition: 0.3s;
+      }
+
+      .social a:hover {
+        background: #fa824c;
+        color: #fff;
+        transform: translateY(-5px);
+      }
+
+      /* HERO IMAGE TOUCH RIGHT EDGE */
+      .hero-img {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .hero-img img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+      }
+      @media (max-width: 900px) {
+        .hero {
+          padding: 50px 0;
+        }
+
+        .hero-text h1 {
+          font-size: 32px;
+        }
+
+        .hero-text h2 {
+          font-size: 16px;
+        }
+      }
+
+      /* ===== ABOUT ===== */
+      .about {
+        padding: 100px 0;
+      }
+
+      .about-wrapper {
+        display: flex;
+        align-items: center;
+      }
+
+      .about-img {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .about-img img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text .container {
+        padding-left: 40px;
+      }
+
+      .about-box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .about-box h2 span {
+        color: #fa824c;
+      }
+
+      .about-box h3 {
+        margin: 10px 0;
+        font-weight: 400;
+        color: #666;
+      }
+
+      .about-box p {
+        margin-bottom: 15px;
+        color: #555;
+        line-height: 22px;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .experience-box {
+        margin-top: 20px;
+        padding: 15px;
+        background: #fff7f2;
+        border-left: 4px solid #fa824c;
+        border-radius: 8px;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: #fa824c;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 25px;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        .hero-wrapper,
+        .about-wrapper {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-text .container,
+        .about-text .container {
+          padding: 0;
+        }
+
+        .hero-img,
+        .about-img {
+          justify-content: center;
+          margin-top: 30px;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* ===== SKILLS SECTION ===== */
+      .skills {
+        padding: 100px 0;
+        background: #f9f9f9;
+      }
+
+      .skills-wrapper {
+        display: flex;
+        align-items: center;
+      }
+
+      .skills-content {
+        flex: 1;
+      }
+
+      .skills-img {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: 40px;
+      }
+
+      .skills-img img {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 20px;
+      }
+
+      .skills h2 {
+        margin-bottom: 30px;
+      }
+
+      .skills h2 span {
+        color: #fa824c;
+      }
+
+      /* Skill Bars */
+      .skill {
+        margin-bottom: 25px;
+      }
+
+      .skill-name {
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .progress {
+        background: #ddd;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 10px;
+        background: #fa824c;
+        width: 0;
+        border-radius: 20px;
+        transition: width 2s ease;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        .skills-wrapper {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .skills-img {
+          display: none; /* Hide image on mobile */
+        }
+
+        .skills-content {
+          width: 100%;
+        }
+      }
+      /* ===== PROJECT SECTION ===== */
+      .projects {
+        padding: 100px 0;
+        background: #f5f5f5;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 32px;
+      }
+
+      .section-title span {
+        color: #fa824c;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+      }
+
+      .project-card {
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        transition: 0.3s;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .project-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .project-info {
+        padding: 20px;
+      }
+
+      .project-info h3 {
+        margin-bottom: 10px;
+      }
+
+      .project-info p {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      .project-buttons a {
+        text-decoration: none;
+        padding: 8px 15px;
+        background: #fa824c;
+        color: #fff;
+        border-radius: 20px;
+        margin-right: 10px;
+        font-size: 14px;
+      }
+      .project-card:hover .project-img img {
+        transform: scale(1.1) rotate(1deg);
+      }
+      .project-img img {
+        transition: transform 0.5s ease;
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ===== CONTACT SECTION ===== */
+      .contact {
+        padding: 100px 0;
+        background: #f5f5f5;
+      }
+
+      .contact-wrapper {
+        display: flex;
+        gap: 50px;
+        margin-top: 50px;
+      }
+
+      .contact-info {
+        flex: 1;
+      }
+
+      .contact-info h3 {
+        margin-bottom: 15px;
+      }
+
+      .contact-info p {
+        margin-bottom: 15px;
+        color: #555;
+      }
+
+      .info-item {
+        margin-top: 20px;
+      }
+
+      .contact-form {
+        flex: 1;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        transition: 0.3s;
+      }
+
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: #fa824c;
+        box-shadow: 0 0 8px rgba(250, 130, 76, 0.3);
+      }
+      .btn {
+        transition: 0.3s;
+      }
+      .btn:hover {
+        transform: translate(1px, -1px);
+      }
+      .btn:active {
+        transform: scale(0.6);
+      }
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 900px) {
+        .contact-wrapper {
+          flex-direction: column;
+        }
+      }
+      .footer {
+        padding: 30px 0;
+        text-align: center;
+        background: #111;
+        color: white;
+      }
+
+      .theme-toggle {
+        position: absolute;
+        right: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="container navbar">
+        <div class="logo">Port <span>folio</span></div>
+
+        <!-- Hamburger -->
+        <div class="menu-toggle" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <nav id="nav-links">
+          <!-- dark mode -->
+          <div class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+          </div>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-wrapper">
+        <div class="hero-text">
+          <div class="container">
+            <h1>Sayan <span>Yadav</span></h1>
+            <h2>
+              <span id="typing-text"></span>
+            </h2>
+
+            <div class="social">
+              <!-- <a href="#"><i class="fab fa-facebook-f"></i></a> -->
+              <a
+                href="https://www.linkedin.com/in/sayan-kumar-1421b13a4?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+              <a href="https://github.com/sayan-29"
+                ><i class="fab fa-github"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-img">
+          <img src="images/yadav.png" alt="Sayan Image" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="about-wrapper">
+        <div class="about-img">
+          <img src="images/sayan.png" alt="About Image" />
+        </div>
+
+        <div class="about-text">
+          <div class="container">
+            <div class="about-box">
+              <h2>About <span>Me</span></h2>
+              <h3>Creative Web Developer</h3>
+
+              <p>
+                I am a passionate web developer who enjoys building clean,
+                responsive and user-friendly websites.
+              </p>
+
+              <div class="info-grid">
+                <div><b>Name:</b> Sayan Yadav</div>
+                <div><b>Email:</b> sayankumar29112006@gmail.com</div>
+                <div><b>Location:</b> India</div>
+                <div><b>Freelance:</b> Available</div>
+                <div><b>Experience:</b> Fresher</div>
+                <div><b>Speciality:</b> Web Development</div>
+              </div>
+
+              <div class="experience-box">
+                <b>Professional Experience</b>
+                <p>
+                  Worked on academic and freelance projects including responsive
+                  websites and interactive web applications.
+                </p>
+              </div>
+
+              <a
+                href="Sayan_Yadav_Frontend_Intern_CV.pdf"
+                class="btn"
+                >Download CV</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- skill section -->
+    <section id="skills" class="skills">
+      <div class="skills-wrapper">
+        <!-- SKILLS LEFT -->
+        <div class="skills-content">
+          <div class="container">
+            <h2>My <span>Skills</span></h2>
+            <div class="skill">
+              <div class="skill-name">Logical Thinking</div>
+              <div class="progress">
+                <div class="progress-bar" data-progress="90%"></div>
+              </div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">Programming language java,c/c++</div>
+              <div class="progress">
+                <div class="progress-bar" data-progress="85%"></div>
+              </div>
+            </div>
+            <div class="skill">
+              <div class="skill-name">HTML</div>
+              <div class="progress">
+                <div class="progress-bar" data-progress="90%"></div>
+              </div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">CSS</div>
+              <div class="progress">
+                <div class="progress-bar" data-progress="85%"></div>
+              </div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">JavaScript</div>
+              <div class="progress">
+                <div class="progress-bar" data-progress="70%"></div>
+              </div>
+            </div>
+
+            <div class="skill">
+              <div class="skill-name">React</div>
+              <div class="progress">
+                <div class="progress-bar" data-progress="35%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IMAGE RIGHT -->
+        <div class="skills-img">
+          <img src="images/skill.png" alt="Skills Image" />
+        </div>
+      </div>
+    </section>
+    <section id="projects" class="projects">
+      <div class="container">
+        <h2 class="section-title">My <span>Projects</span></h2>
+
+        <div class="project-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div class="project-img">
+              <img src="images/portfolio.png" alt="Project 1" />
+            </div>
+            <div class="project-info">
+              <h3>Portfolio Website</h3>
+              <p>
+                Personal responsive portfolio built using HTML, CSS &
+                JavaScript.
+              </p>
+              <div class="project-buttons">
+                <a href="https://sayan29.netlify.app/">View Live</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div class="project-img">
+              <img src="images/edvise.png" alt="Project 2" />
+            </div>
+            <div class="project-info">
+              <h3>Edvise</h3>
+              <p>
+                Helping students discover the right stream based on their
+                interests, strengths, and career goals.
+              </p>
+              <div class="project-buttons">
+                <a href="https://edvise90.netlify.app/">View Live</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card">
+            <div class="project-img">
+              <img src="images/password.png" alt="Project 3" />
+            </div>
+            <div class="project-info">
+              <h3>Password Validation Form</h3>
+              <p>
+                Choose a strong password with a mix of letters, numbers, and at
+                least 8 characters to keep your account secure.
+              </p>
+              <div class="project-buttons">
+                <a href="https://password-20.netlify.app/">View Live</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Contact <span>Me</span></h2>
+
+        <div class="contact-wrapper">
+          <!-- LEFT SIDE INFO -->
+          <div class="contact-info">
+            <h3>Let's Work Together</h3>
+            <p>
+              If you have any project in mind or want to collaborate, feel free
+              to contact me.
+            </p>
+
+            <div class="info-item">
+              <strong>Email:</strong>
+              <p>sayankumar29112006@gmail.com</p>
+            </div>
+
+            <div class="info-item">
+              <strong>Location:</strong>
+              <p>India</p>
+            </div>
+
+            <div class="info-item">
+              <strong>Phone:</strong>
+              <p>+91 9896965682</p>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE FORM -->
+          <div class="contact-form">
+            <form id="contact-form">
+              <div class="input-group">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email"
+                  required
+                />
+              </div>
+
+              <div class="input-group">
+                <textarea
+                  name="message"
+                  rows="5"
+                  placeholder="Your Message"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn">Send Message</button>
+
+              <p id="form-status" style="margin-top: 10px"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <p>© 2024 Sayan Yadav. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script src="portfolio4.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  </body>
+</html>
